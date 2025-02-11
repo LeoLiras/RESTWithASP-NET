@@ -1,7 +1,8 @@
 using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
 using RESTWithASP_NET.Model;
-using RESTWithASP_NET.Services.Implementations;
+using RESTWithASP_NET.Business;
+using RESTWithASP_NET.Repository;
 
 namespace RESTWithASP_NET.Controllers
 {
@@ -13,9 +14,9 @@ namespace RESTWithASP_NET.Controllers
         
 
         private readonly ILogger<PersonController> _logger;
-        private IPersonService _personService;
+        private IPersonBusiness _personService;
 
-        public PersonController(ILogger<PersonController> logger, IPersonService personService)
+        public PersonController(ILogger<PersonController> logger, IPersonBusiness personService)
         {
             _logger = logger;
             _personService = personService;

@@ -3,15 +3,15 @@ using RESTWithASP_NET.Model;
 using RESTWithASP_NET.Model.Context;
 using System;
 
-namespace RESTWithASP_NET.Services.Implementations
+namespace RESTWithASP_NET.Repository.Implementations
 {
-    public class PersonServiceImplementation : IPersonService
+    public class PersonRepositoryImplementation : IPersonRepository
     {
         private volatile int count;
 
         private MySQLContext _context;
 
-        public PersonServiceImplementation(MySQLContext context)
+        public PersonRepositoryImplementation(MySQLContext context)
         {
             _context = context;
         }
@@ -84,7 +84,7 @@ namespace RESTWithASP_NET.Services.Implementations
 
         }
 
-        private bool Exists(long id)
+        public bool Exists(long id)
         {
             return _context.Persons.Any(p => p.Id.Equals(id));
         }
