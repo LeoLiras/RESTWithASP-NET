@@ -1,11 +1,13 @@
+using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
 using RESTWithASP_NET.Model;
 using RESTWithASP_NET.Services.Implementations;
 
 namespace RESTWithASP_NET.Controllers
 {
+    [ApiVersion("1")] 
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/[controller]/v{version:apiVersion}")]
     public class PersonController : ControllerBase
     {
         
