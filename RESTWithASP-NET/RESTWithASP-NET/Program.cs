@@ -1,12 +1,11 @@
-using Microsoft.EntityFrameworkCore;
-using RESTWithASP_NET.Model.Context;
-using RESTWithASP_NET.Business.Implementations;
-using RESTWithASP_NET.Business;
-using RESTWithASP_NET.Repository;
-using RESTWithASP_NET.Repository.Implementations;
-using Microsoft.AspNetCore.Hosting;
-using MySqlConnector;
 using EvolveDb;
+using Microsoft.EntityFrameworkCore;
+using MySqlConnector;
+using RESTWithASP_NET.Business;
+using RESTWithASP_NET.Business.Implementations;
+using RESTWithASP_NET.Model.Context;
+using RESTWithASP_NET.Repository;
+using RESTWithASP_NET.Repository.Generic;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,7 +16,7 @@ builder.Services.AddControllers();
 
 var connection = builder.Configuration["MySQLConnection:MySQLConnectionString"];
 
-builder.Services.AddDbContext<MySQLContext>(options => 
+builder.Services.AddDbContext<MySQLContext>(options =>
                                                 options.UseMySql(connection, ServerVersion.AutoDetect(connection)));
 
 if (builder.Environment.IsDevelopment())
@@ -28,9 +27,8 @@ if (builder.Environment.IsDevelopment())
 builder.Services.AddApiVersioning();
 
 builder.Services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();
-builder.Services.AddScoped<IPersonRepository, PersonRepositoryImplementation>();
 builder.Services.AddScoped<IBookBusiness, BookBusinessImplementation>();
-builder.Services.AddScoped<IBookRepository, BookRepositoryImplementation>();
+builder.Services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
 
 var app = builder.Build();
 

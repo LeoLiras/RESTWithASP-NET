@@ -1,13 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using RESTWithASP_NET.Model.Base;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RESTWithASP_NET.Model
 {
     [Table("books")]
-    public class Book
+    public class Book : BaseEntity
     {
-        [Column("id")]
-        public long Id { get; set; }
-
         [Column("author")]
         public string? Author { get; set; }
 
@@ -19,6 +17,5 @@ namespace RESTWithASP_NET.Model
 
         [Column("title")]
         public string? Title { get; set; }
-
     }
 }
