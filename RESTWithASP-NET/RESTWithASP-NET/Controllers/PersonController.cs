@@ -1,17 +1,16 @@
 using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
-using RESTWithASP_NET.Model;
 using RESTWithASP_NET.Business;
-using RESTWithASP_NET.Repository;
+using RESTWithASP_NET.Data.VO;
 
 namespace RESTWithASP_NET.Controllers
 {
-    [ApiVersion("1")] 
+    [ApiVersion("1")]
     [ApiController]
     [Route("api/[controller]/v{version:apiVersion}")]
     public class PersonController : ControllerBase
     {
-        
+
 
         private readonly ILogger<PersonController> _logger;
         private IPersonBusiness _personService;
@@ -39,7 +38,7 @@ namespace RESTWithASP_NET.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] Person person)
+        public IActionResult Post([FromBody] PersonVO person)
         {
             if (person == null) return BadRequest();
 
@@ -47,7 +46,7 @@ namespace RESTWithASP_NET.Controllers
         }
 
         [HttpPut]
-        public IActionResult Put([FromBody] Person person)
+        public IActionResult Put([FromBody] PersonVO person)
         {
             if (person == null) return BadRequest();
 
