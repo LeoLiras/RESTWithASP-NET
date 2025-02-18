@@ -1,6 +1,7 @@
 ﻿using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
 using RESTWithASP_NET.Business;
+using RESTWithASP_NET.Data.VO;
 using RESTWithASP_NET.Model;
 
 namespace RESTWithASP_NET.Controllers
@@ -36,7 +37,7 @@ namespace RESTWithASP_NET.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] Book book)
+        public IActionResult Post([FromBody] BookVO book)
         {
             if (book == null) return BadRequest();
 
@@ -44,7 +45,7 @@ namespace RESTWithASP_NET.Controllers
         }
 
         [HttpPut]
-        public IActionResult Put([FromBody] Book book)
+        public IActionResult Put([FromBody] BookVO book)
         {
             if (book == null) return BadRequest();
 
