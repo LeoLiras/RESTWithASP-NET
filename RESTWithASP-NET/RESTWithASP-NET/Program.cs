@@ -1,5 +1,6 @@
 using EvolveDb;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Net.Http.Headers;
 using MySqlConnector;
 using RESTWithASP_NET.Business;
 using RESTWithASP_NET.Business.Implementations;
@@ -23,6 +24,14 @@ if (builder.Environment.IsDevelopment())
 {
     MigrateDatabase(connection);
 }
+
+builder.Services.AddMvc(options =>
+{
+    options.RespectBrowserAcceptHeader = true;
+    options.FormatterMappings.SetMediaTypeMappingForFormat("xml", MediaTypeHeaderValue.Parse("application/xml"));
+    options.FormatterMappings.SetMediaTypeMappingForFormat("xml", MediaTypeHeaderValue.Parse("application/json"));
+})
+.AddXmlSerializerFormatters();
 
 builder.Services.AddApiVersioning();
 
