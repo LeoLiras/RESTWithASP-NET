@@ -4,6 +4,8 @@ using Microsoft.Net.Http.Headers;
 using MySqlConnector;
 using RESTWithASP_NET.Business;
 using RESTWithASP_NET.Business.Implementations;
+using RESTWithASP_NET.Hypermedia.Enricher;
+using RESTWithASP_NET.Hypermedia.Filters;
 using RESTWithASP_NET.Model.Context;
 using RESTWithASP_NET.Repository;
 using RESTWithASP_NET.Repository.Generic;
@@ -33,6 +35,10 @@ builder.Services.AddMvc(options =>
 })
 .AddXmlSerializerFormatters();
 
+var filterOptions = new HyperMediaFilterOptions();
+filterOptions.ContentResponseEnricherList.Add(new PersonEnricher());
+builder.Services.AddSingleton(filterOptions);
+
 builder.Services.AddApiVersioning();
 
 builder.Services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();
@@ -48,6 +54,8 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapControllerRoute("DefaultApi", "{controller=values}/v{version=apiVersion}/{id?}");
 
 app.Run();
 

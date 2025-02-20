@@ -1,10 +1,12 @@
-﻿using RESTWithASP_NET.Model.Base;
+﻿using RESTWithASP_NET.Hypermedia;
+using RESTWithASP_NET.Hypermedia.Abstract;
+using RESTWithASP_NET.Model.Base;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RESTWithASP_NET.Data.VO
 {
 
-    public class PersonVO
+    public class PersonVO : ISupportsHyperMedia
     {
         public long Id { get; set; }
 
@@ -15,7 +17,6 @@ namespace RESTWithASP_NET.Data.VO
         public string? Address { get; set; }
 
         public string? Gender { get; set; }
-
-
+        public List<HyperMediaLink> Links { get ; set ; } = new List<HyperMediaLink>();
     }
 }
