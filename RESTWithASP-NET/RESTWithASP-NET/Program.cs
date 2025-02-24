@@ -1,6 +1,8 @@
 using EvolveDb;
+using Microsoft.AspNetCore.Rewrite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Net.Http.Headers;
+using Microsoft.OpenApi.Models;
 using MySqlConnector;
 using RESTWithASP_NET.Business;
 using RESTWithASP_NET.Business.Implementations;
@@ -42,6 +44,23 @@ builder.Services.AddSingleton(filterOptions);
 
 builder.Services.AddApiVersioning();
 
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1",
+        new OpenApiInfo
+        {
+            Title = "REST API's From 0 to Azure with ASP.NET and Docker",
+            Version = "v1",
+            Description = "API RESTFul developed in course",
+            Contact = new OpenApiContact
+            {
+                Name = "Leonardo de Lira",
+                Url = new Uri("https://github.com/leoliras")
+            }
+        });
+});
+
 builder.Services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();
 builder.Services.AddScoped<IBookBusiness, BookBusinessImplementation>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
@@ -54,11 +73,22 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
+app.UseSwagger();
+
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "REST API's From 0 to Azure with ASP.NET and Docker - v1");
+});
+
+var option = new RewriteOptions();
+option.AddRedirect("^$", "swagger");
+app.UseRewriter(option);
+
 app.MapControllers();
 
 app.MapControllerRoute("DefaultApi", "{controller=values}/v{version=apiVersion}/{id?}");
 
-app.Run();
+app.Run(); 
 
 void MigrateDatabase(string? connection)
 {
