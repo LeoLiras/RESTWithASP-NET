@@ -7,7 +7,7 @@ using System.Collections.Concurrent;
 namespace RESTWithASP_NET.Hypermedia
 {
     public abstract class ContentResponseEnricher<T> : IResponseEnricher where T : ISupportsHyperMedia
-    {//abstract and lock
+    {
         public ContentResponseEnricher()
         {
 
