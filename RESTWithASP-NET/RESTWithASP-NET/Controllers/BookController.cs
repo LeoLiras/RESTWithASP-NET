@@ -1,10 +1,8 @@
-﻿using Asp.Versioning;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RESTWithASP_NET.Business;
 using RESTWithASP_NET.Data.VO;
 using RESTWithASP_NET.Hypermedia.Filters;
-using RESTWithASP_NET.Model;
 
 namespace RESTWithASP_NET.Controllers
 {

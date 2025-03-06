@@ -20,7 +20,7 @@ namespace RESTWithASP_NET.Repository
         public User ValidateCredentials(UserVO user)
         {
             var pass = ComputeHash(user.Password, SHA256.Create());
-            return _context.Users.FirstOrDefault(u => (u.UserName == user.UserName) && (u.Password == pass));
+            return _context.Users.FirstOrDefault(u => (u.UserName == user.UserName) && (u.Password == pass));  
         }
 
         public User RefreshUserInfo(User user)
