@@ -1,4 +1,5 @@
-﻿using RESTWithASP_NET.Data.VO;
+﻿using Microsoft.EntityFrameworkCore;
+using RESTWithASP_NET.Data.VO;
 
 namespace RESTWithASP_NET.Business
 {
@@ -7,5 +8,7 @@ namespace RESTWithASP_NET.Business
         TokenVO ValidateCredentials(UserVO user);
 
         TokenVO ValidateCredentials(TokenVO token);
+
+        public bool RevokeToken(string username);
     }
 }
