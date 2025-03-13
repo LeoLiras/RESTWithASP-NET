@@ -1,4 +1,5 @@
 ﻿using RESTWithASP_NET.Data.VO;
+using RESTWithASP_NET.Model;
 
 namespace RESTWithASP_NET.Business
 {
@@ -8,6 +9,7 @@ namespace RESTWithASP_NET.Business
         PersonVO FindById(long id);
         List<PersonVO> FindAll();
         PersonVO Update(PersonVO person);
+        PersonVO Disable(long id);
         void Delete(long id);
 
     }

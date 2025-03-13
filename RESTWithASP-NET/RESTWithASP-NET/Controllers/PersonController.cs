@@ -73,6 +73,19 @@ namespace RESTWithASP_NET.Controllers
             return Ok(_personService.Update(person));
         }
 
+        [HttpPatch("{id}")]
+        [ProducesResponseType((200), Type = typeof(List<PersonVO>))]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
+        [TypeFilter(typeof(HyperMediaFilter))]
+        public IActionResult Patch(long id)
+        {
+            var person = _personService.Disable(id);
+
+            return Ok(person);
+        }
+
         [HttpDelete("{id}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
