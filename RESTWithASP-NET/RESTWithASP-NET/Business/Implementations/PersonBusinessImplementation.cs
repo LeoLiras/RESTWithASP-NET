@@ -55,7 +55,10 @@ namespace RESTWithASP_NET.Business.Implementations
 
         }
 
-        
+        public List<PersonVO> FindByName(string firstName, string lastName)
+        {
+            return _converter.Parse(_repository.FindByName(firstName, lastName));
+        }
 
         //private Person MockPerson(int i)
         //{

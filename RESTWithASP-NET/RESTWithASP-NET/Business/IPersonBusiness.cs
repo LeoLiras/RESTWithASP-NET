@@ -7,6 +7,7 @@ namespace RESTWithASP_NET.Business
     {
         PersonVO Create(PersonVO person);
         PersonVO FindById(long id);
+        public List<PersonVO> FindByName(string firstName, string lastName);
         List<PersonVO> FindAll();
         PersonVO Update(PersonVO person);
         PersonVO Disable(long id);
