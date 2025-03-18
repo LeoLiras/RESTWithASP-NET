@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <Folder Include="Repository\Implementations\" />
+    <Folder Include="UploadDir\" />
   </ItemGroup>
 
 </Project>
