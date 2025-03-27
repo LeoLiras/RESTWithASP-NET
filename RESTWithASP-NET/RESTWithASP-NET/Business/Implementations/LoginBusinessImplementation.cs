@@ -30,14 +30,14 @@ namespace RESTWithASP_NET.Business.Implementations
             var claims = new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString("N")),
-                new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName)
+                new Claim(JwtRegisteredClaimNames.UniqueName, user.user_name)
             };
 
             var accessToken = _tokenService.GenerateAccessToken(claims);
             var refreshToken = _tokenService.GenerateRefreshToken();
 
-            user.RefreshToken = refreshToken;
-            user.RefreshTokenExpiryTime = DateTime.Now.AddDays(_configuration.DaysToExpiry);
+            user.refresh_token = refreshToken;
+            user.refresh_token_expiry_time = DateTime.Now.AddDays(_configuration.DaysToExpiry);
 
             _repository.RefreshUserInfo(user);
 
@@ -62,13 +62,13 @@ namespace RESTWithASP_NET.Business.Implementations
             var user = _repository.ValidateCredentials(username);
 
             if (user == null ||
-                user.RefreshToken != refreshToken || 
-                user.RefreshTokenExpiryTime <= DateTime.Now) return null;
+                user.refresh_token != refreshToken || 
+                user.refresh_token_expiry_time <= DateTime.Now) return null;
 
             accessToken = _tokenService.GenerateAccessToken(principal.Claims);
             refreshToken = _tokenService.GenerateRefreshToken();
 
-            user.RefreshToken = refreshToken;
+            user.refresh_token = refreshToken;
 
             _repository.RefreshUserInfo(user);
 

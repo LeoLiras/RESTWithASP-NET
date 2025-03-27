@@ -17,34 +17,34 @@ namespace RESTWithASP_NET.Repository
             _context = context;
         }
 
-        public User ValidateCredentials(UserVO user)
+        public users ValidateCredentials(UserVO user)
         {
             var pass = ComputeHash(user.Password, SHA256.Create());
-            return _context.Users.FirstOrDefault(u => (u.UserName == user.UserName) && (u.Password == pass));  
+            return _context.Users.FirstOrDefault(u => (u.user_name == user.UserName) && (u.password == pass));  
         }
 
-        public User ValidateCredentials(string username)
+        public users ValidateCredentials(string username)
         {
-            return _context.Users.SingleOrDefault(u => u.UserName == username);
+            return _context.Users.SingleOrDefault(u => u.user_name == username);
         }
 
         public bool RevokeToken(string username)
         {
-            var user = _context.Users.SingleOrDefault(u => u.UserName == username);
+            var user = _context.Users.SingleOrDefault(u => u.user_name == username);
 
             if (user is null) return false;
 
-            user.RefreshToken = null;
+            user.refresh_token = null;
             _context.SaveChanges();
 
             return true;
         }
 
-        public User RefreshUserInfo(User user)
+        public users RefreshUserInfo(users user)
         {
-            if (!_context.Users.Any(u => u.Id.Equals(user.Id))) return null;
+            if (!_context.Users.Any(u => u.id.Equals(user.id))) return null;
 
-            var result = _context.Users.SingleOrDefault(p => p.Id.Equals(user.Id));
+            var result = _context.Users.SingleOrDefault(p => p.id.Equals(user.id));
 
             if (result != null)
             {

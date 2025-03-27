@@ -72,10 +72,10 @@ var connection = builder.Configuration["MySQLConnection:MySQLConnectionString"];
 builder.Services.AddDbContext<MySQLContext>(options =>
                                                 options.UseMySql(connection, ServerVersion.AutoDetect(connection)));
 
-if (builder.Environment.IsDevelopment())
-{
-    MigrateDatabase(connection);
-}
+//if (builder.Environment.IsDevelopment())
+//{
+//    MigrateDatabase(connection);
+//}
 
 builder.Services.AddMvc(options =>
 {
